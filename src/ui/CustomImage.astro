@@ -1,0 +1,30 @@
+---
+import { getImage, Image } from 'astro:assets'
+import { imgurWebp } from '../lib/imgurWebp'
+
+interface Props {
+  src: string | ImageMetadata
+  alt: string
+  height: number
+  width: number
+  style?: string
+}
+
+const { src, height, width, style } = Astro.props
+
+const webPImage = imgurWebp(src)
+
+const optimizedImg = await getImage({
+  src: webPImage,
+  format: 'webp',
+  width,
+  height
+})
+console.log('optimizedImg', optimizedImg)
+---
+
+<Image
+  {...Astro.props}
+  class={style}
+  src={optimizedImg.src}
+/>
