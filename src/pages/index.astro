@@ -9,12 +9,14 @@ import FormattedDate from '../components/FormattedDate.astro'
 
 const postsRef = await firestore?.collection('posts').get()
 
-const postsData: IPost[] = postsRef?.docs.map((post: any) => {
-  return {
-    id: post.id,
-    ...post.data()
-  } as IPost
-})
+const postsData: IPost[] = !postsRef
+  ? []
+  : postsRef.docs.map((post: any) => {
+      return {
+        id: post.id,
+        ...post.data()
+      } as IPost
+    })
 ---
 
 <!doctype html>

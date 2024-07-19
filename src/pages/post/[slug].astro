@@ -16,8 +16,8 @@ export async function getStaticPaths() {
     return []
   }
 
-  return posts.docs.map((post: IPost) => {
-    const { id }: { id: string } = post
+  return posts.docs.map((post: any) => {
+    const { id } = post
 
     return {
       params: {
