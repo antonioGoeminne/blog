@@ -17,6 +17,7 @@
     "astro": "^4.12.1",
     "firebase": "^10.12.4",
     "firebase-admin": "^12.2.0",
+    "sharp": "^0.33.4",
     "typescript": "^5.5.3"
   },
   "devDependencies": {
