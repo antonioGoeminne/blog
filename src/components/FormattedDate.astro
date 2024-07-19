@@ -1,14 +1,15 @@
 ---
 interface Props {
-  date: Date
+  date: { _seconds: number }
 }
 
 const { date } = Astro.props
+const formatted_date = new Date(date._seconds * 1000)
 ---
 
-<time datetime={date.toISOString()}>
+<time datetime={formatted_date.toISOString()}>
   {
-    date.toLocaleDateString('en-us', {
+    formatted_date.toLocaleDateString('en-us', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
