@@ -21,4 +21,6 @@ if (app) {
   firestore = getFirestore(app)
 }
 
-export { firestore }
+const db = getFirestore(app)
+
+export { firestore, db }
