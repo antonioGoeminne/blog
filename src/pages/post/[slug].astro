@@ -1,0 +1,32 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro'
+import type { IPost } from '../../posts/types'
+import { firestore } from '../../firebase/server'
+
+const { slug } = Astro.params
+
+const productData = await firestore?.collection('posts').doc(slug).get()
+
+const post = productData?.data() as IPost
+
+export async function getStaticPaths() {
+  const posts = await firestore?.collection('posts').get()
+
+  if (!posts) {
+    return []
+  }
+
+  return posts.docs.map((post: IPost) => {
+    const { id }: { id: string } = post
+
+    return {
+      params: {
+        slug: id
+      }
+    }
+  })
+}
+export const prerender = true
+---
+
+<BlogPost {...post} />
